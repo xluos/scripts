@@ -1,7 +1,7 @@
 version: '3'
 services:
   prisma:
-    image: prismagraphql/prisma:1.24
+    image: prismagraphql/prisma:1.26
     container_name: prisma
     restart: unless-stopped
     ports:
@@ -10,9 +10,16 @@ services:
       PRISMA_CONFIG: |
         port: 4466
         databases:
-          default:
+          mongodb:
             connector: mongo
             uri: mongodb://xluos:xluos@mongo
+          postgres:
+            connector: postgres
+            host: postgres
+            port: 5432
+            user: xluos
+            password: xluos
+            migrations: true
     networks:
       - default
       - app_net
